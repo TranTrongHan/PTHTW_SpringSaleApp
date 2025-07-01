@@ -1,1 +1,13 @@
+com\tth\pojo\Comment.class
+com\tth\pojo\ProdTag.class
+com\mycompany\tth\springsaleapp\HibernateConfigs.class
+com\tth\pojo\Tag.class
+com\tth\pojo\User.class
+com\tth\repositories\impl\StatsRepositoryImpl.class
+com\tth\pojo\OrderDetail.class
+com\tth\repositories\impl\ProductRepositoryImpl.class
+com\tth\repositories\impl\CategoryRepositoryImpl.class
 com\mycompany\tth\springsaleapp\SpringSaleApp.class
+com\tth\pojo\SaleOrder.class
+com\tth\pojo\Product.class
+com\tth\pojo\Category.class

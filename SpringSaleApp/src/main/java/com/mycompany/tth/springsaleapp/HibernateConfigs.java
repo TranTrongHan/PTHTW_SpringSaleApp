@@ -5,7 +5,13 @@
 package com.mycompany.tth.springsaleapp;
 
 import com.tth.pojo.Category;
+import com.tth.pojo.Comment;
+import com.tth.pojo.OrderDetail;
+import com.tth.pojo.ProdTag;
 import com.tth.pojo.Product;
+import com.tth.pojo.SaleOrder;
+import com.tth.pojo.Tag;
+import com.tth.pojo.User;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -43,6 +49,13 @@ public class HibernateConfigs {
         conf.setProperties(props);
         conf.addAnnotatedClass(Category.class);
         conf.addAnnotatedClass(Product.class);
+        conf.addAnnotatedClass(Comment.class);
+        conf.addAnnotatedClass(OrderDetail.class);
+        conf.addAnnotatedClass(ProdTag.class);
+        conf.addAnnotatedClass(SaleOrder.class);
+        conf.addAnnotatedClass(Tag.class);
+        conf.addAnnotatedClass(User.class);
+        
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
         FACTORY = conf.buildSessionFactory(serviceRegistry);
 

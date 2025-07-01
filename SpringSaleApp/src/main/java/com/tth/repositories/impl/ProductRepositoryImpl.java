@@ -67,6 +67,30 @@ public class ProductRepositoryImpl {
             return q.getResultList();
         }
     }
+    
+    public Product getProductById(int id){
+        try(Session s = HibernateConfigs.getFACTORY().openSession()){
+            return s.get(Product.class,id);
+        }
+    }
+    
+    public void addOrUpdateProduct(Product p){
+        try(Session s = HibernateConfigs.getFACTORY().openSession()){
+            if(p.getId() == null){
+                s.persist(p);
+            } else {
+                s.merge(p);
+            }
+        }
+    }
+    
+    public void deleteProduct(int id){
+        // Phai canh bao hoac phan tich nghiep vu ro rang co xoa luon thang  lien quan hay khong hoac giu lai => User thay ro canh bao khi xoa
+        try(Session s = HibernateConfigs.getFACTORY().openSession()){
+            Product p = this.getProductById(id);
+            s.remove(p);
+        }
+    }
 
     
 }
