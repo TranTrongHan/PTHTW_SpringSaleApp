@@ -1,14 +1,16 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Trang chu</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <title>Home Page</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+
     </head>
     <body>
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">E-commerce Website</a>
+                <a class="navbar-brand" href="#">E-Commerce</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -20,26 +22,52 @@
                         <li class="nav-item" th:each="c : ${categories}">
                             <a class="nav-link" href="#" th:text="${c.name}"></a>
                         </li>
+
                     </ul>
                 </div>
             </div>
         </nav>
-        <main class="container">
+        <main class="container container-fluid">
+            <h1 class="text-info text-center ">QUAN LY SAN PHAM</h1>
+            <div class="mt-2 mb-2">
+                <a class="btn btn-success" th:href="@{/products}">Them san pham</a>
+            </div>
+            <div>
+                <form th:action="@{/}">
+                    <div class="form-floating mb-3 mt-3 p-3">
+                        <input type="text" class="form-control" id="kw" placeholder="Nhap tu khoa" name="kw">
+                        <label for="kw">Nhap tu khoa</label>
+                    </div>
+                    <div class="form-floating mt-3 mb-3 row">
+                        <div class="col-md-6 col-12 p-3">
+                            <input type="number" class="form-control" id="fromPrice" placeholder="Nhap gia min" name="fromPrice">
+                            <label for="fromPrice">Gia min</label>
+                        </div>
+                        <div class="col-md-6 col-12 p-3">
+                            <input type="number" class="form-control" id="toPrice" placeholder="Nhap gia max" name="toPrice">
+                            <label for="toPrice">Gia max</label>
+                        </div>
+                    </div>
+                    <div class="form-floating mt-3 mb-3 ">
+                        <button type="submit" class="btn btn-info">Tim kiem</button>
+                    </div>
+                </form>
+            </div>
             <table class="table">
                 <tr>
                     <th></th>
                     <th>Id</th>
-                    <th>Ten san pham</th>
-                    <th>Gia san pham</th>
+                    <th>Ten</th>
+                    <th>Gia</th>
                     <th></th>
                 </tr>
-                <tr th:each="p : ${products}">
+                <tr th:each="p :${products}">
                     <td>
-                        <img th:src="${p.image}" alt="alt" width="200"/>
+                        <img th:src="${p.image}" alt="alt" width="200" class="rounded"/>
                     </td>
                     <td th:text="${p.id}"></td>
                     <td th:text="${p.name}"></td>
-                    <td th:text="${p.price + 'VND'}"></td>
+                    <td th:text="${p.price} + 'VND' "></td>
                     <td>
                         <a href="#" class="btn btn-info">Cap nhat</a>
                         <button class="btn btn-danger">Xoa</button>
@@ -48,6 +76,7 @@
             </table>
         </main>
 
-    </body>
 
+
+    </body>
 </html>

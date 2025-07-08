@@ -15,6 +15,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,12 +30,20 @@ public class HomeController {
     @Autowired
     private ProductService prodService;
     
-    @Transactional
+    @ModelAttribute
+    public void commonResponse(Model model){
+        model.addAttribute("categories",this.cateService.getCates());
+    }
+        
     @RequestMapping("/")
     public String index(Model model, @RequestParam Map<String, String> params){
-        model.addAttribute("msg" , "HELLO OU");
+        
         model.addAttribute("products",this.prodService.getProducts(params));
-        model.addAttribute("categories",this.cateService.getCates());
         return "index";
+    }
+    @RequestMapping("/products")
+    public String listProducts(){
+        
+        return "products";
     }
 }
