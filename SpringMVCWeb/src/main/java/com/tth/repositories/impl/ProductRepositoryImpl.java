@@ -77,21 +77,23 @@ public class ProductRepositoryImpl implements ProductRepository{
         
     }
     
-//    public Product getProductById(int id){
-//        try(Session s = HibernateConfigs.getFACTORY().openSession()){
-//            return s.get(Product.class,id);
-//        }
-//    }
-//    
-//    public void addOrUpdateProduct(Product p){
-//        try(Session s = HibernateConfigs.getFACTORY().openSession()){
-//            if(p.getId() == null){
-//                s.persist(p);
-//            } else {
-//                s.merge(p);
-//            }
-//        }
-//    }
+    @Override
+    public Product getProductById(int id){
+        Session s = this.factory.getObject().getCurrentSession();
+            return s.get(Product.class,id);
+        
+    }
+    
+    @Override
+    public void addOrUpdateProduct(Product p){
+        Session s = this.factory.getObject().getCurrentSession();
+            if(p.getId() == null){
+                s.persist(p);
+            } else {
+                s.merge(p);
+            }
+        
+    }
 //    
 //    public void deleteProduct(int id){
 //        // Phai canh bao hoac phan tich nghiep vu ro rang co xoa luon thang  lien quan hay khong hoac giu lai => User thay ro canh bao khi xoa
