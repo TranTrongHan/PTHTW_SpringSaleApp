@@ -50,14 +50,14 @@
                 <td th:text="${p.price} + 'VND' "></td>
                 <td>
                     <a th:href="@{'/products/' + ${p.id}}" class="btn btn-info">Cap nhat</a>
-                    <button class="btn btn-danger">Xoa</button>
+                    <button th:onclick="'deleteProduct(\''+@{/api/products/} + ${p.id} + '\')' " class="btn btn-danger">Xoa</button>
                 </td>
             </tr>
         </table>
 
     </main>
     <div th:replace="base :: footer"></div>
-
+    <script th:src="@{/js/main.js}"></script>
 
 </body>
 </html>

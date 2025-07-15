@@ -41,8 +41,6 @@ public class ProductServiceImpl implements ProductService{
             }catch(IOException ex){
                 Logger.getLogger(ProductServiceImpl.class.getName()).log(Level.SEVERE,null,ex);
             }
-        } else{
-            p.setImage("https://res.cloudinary.com/dxxwcby8l/image/upload/v1647248652/dkeolz3ghc0eino87iec.jpg");
         }
         
         this.productRepo.addOrUpdateProduct(p);
@@ -51,6 +49,11 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Product getProductById(int id) {
         return this.productRepo.getProductById(id);
+    }
+
+    @Override
+    public void deleteProduct(int id) {
+        this.productRepo.deleteProduct(id);
     }
     
     
