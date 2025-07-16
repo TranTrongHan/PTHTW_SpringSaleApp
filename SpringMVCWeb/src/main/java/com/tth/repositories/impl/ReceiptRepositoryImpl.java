@@ -5,16 +5,51 @@
 package com.tth.repositories.impl;
 
 import com.tth.pojo.Cart;
+import com.tth.pojo.OrderDetail;
+import com.tth.pojo.SaleOrder;
+import com.tth.repositories.ProductRepository;
+import com.tth.repositories.ReceiptRepository;
+import com.tth.repositories.UserRepository;
+import java.util.Date;
 import java.util.List;
-
+import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 /**
  *
  * @author PC
  */
-public class ReceiptRepositoryImpl {
-    public void addReceipt(List<Cart> carts){
-        if(carts!=null){
-            
+@Repository
+@Transactional
+public class ReceiptRepositoryImpl implements ReceiptRepository{
+    @Autowired
+    private LocalSessionFactoryBean factory;
+    @Autowired
+    private UserRepository userRepo;
+    @Autowired
+    private ProductRepository productRepo;
+    
+    @Override
+    public void addReceipt(List<Cart> carts) {
+        if (carts != null) {
+            Session s = this.factory.getObject().getCurrentSession();
+            SaleOrder order = new SaleOrder();
+            order.setUserId(this.userRepo.getUserByUsername("dhthanh"));
+            order.setCreatedDate(new Date());
+            s.persist(order);
+
+            for (var x : carts) {
+                OrderDetail d = new OrderDetail();
+                d.setQuantity(x.getQuantity());
+                d.setUnitPrice(x.getPrice());
+                d.setProductId(this.productRepo.getProductById(x.getId()));
+                d.setOrderId(order);
+
+                s.persist(d);
+            }
         }
+
     }
 }
