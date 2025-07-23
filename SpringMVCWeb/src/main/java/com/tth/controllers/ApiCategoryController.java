@@ -4,33 +4,29 @@
  */
 package com.tth.controllers;
 
-import com.tth.pojo.Cart;
-import com.tth.services.ReceiptService;
+import com.tth.pojo.Category;
+import com.tth.services.CategoryService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author admin
+ * @author huu-thanhduong
  */
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
-public class ApiCartController {
-    
+public class ApiCategoryController {
     @Autowired
-    private ReceiptService receiptService;
-            
-    @PostMapping("/carts")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void addToCart(@RequestBody List<Cart> cart){
-        this.receiptService.addReceipt(cart);
+    private CategoryService cateService;
+    @GetMapping("/categories")
+    public ResponseEntity<List<Category>> list() {
+        return new ResponseEntity<>(this.cateService.getCates(), HttpStatus.OK);
     }
 }

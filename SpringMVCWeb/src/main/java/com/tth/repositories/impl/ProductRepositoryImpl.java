@@ -55,7 +55,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
             String cateId = params.get("cateId");
             if (cateId != null && !cateId.isEmpty()) {
-                predicates.add(b.equal(root.get("category").as(Integer.class), cateId));
+                predicates.add(b.equal(root.get("category").as(Integer.class), Integer.parseInt(cateId)));
             }
 
             query.where(predicates.toArray(Predicate[]::new));
